@@ -1,44 +1,28 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from .models import SendRequest_to_login
 
-from rest_framework import serializers
-from django.contrib.auth.models import User
-from django.contrib.auth.password_validation import validate_password
 
-class SignUpSerializer(serializers.ModelSerializer):
-    # A serializer for creating new users
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
-    password2 = serializers.CharField(write_only=True, required=True)
+class SendRequest_to_login_Serializer(serializers.ModelSerializer):
+    surname = serializers.CharField(write_only=True, required=True)
+    phone_number = serializers.IntegerField(write_only=True, required=True)
+    scanned_document = serializers.ImageField(required=True)
+    id = serializers.IntegerField(read_only=True, required=False)
 
     class Meta:
-        model = User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name')
-        extra_kwargs = {
-            'first_name': {'required': True},
-            'last_name': {'required': True},
-            'email': {'required': True}
-        }
+        model = SendRequest_to_login
+        fields = ("id", "surname", "phone_number", "scanned_document")
 
     def validate(self, attrs):
-        # Validate that the passwords match and the email is unique
-        if attrs['password'] != attrs['password2']:
-            raise serializers.ValidationError({"password": "Password fields didn't match."})
-
-        if User.objects.filter(email=attrs['email']).exists():
-            raise serializers.ValidationError({"email": "Email already exists."})
-
+        if SendRequest_to_login.objects.filter(
+            phone_number=attrs["phone_number"]
+        ).exists():
+            raise serializers.ValidationError(
+                {"phone_number": "Sizning surovingiz tekshirish jarayonida"}
+            )
         return attrs
 
     def create(self, validated_data):
-        # Create a new user with the validated data
-        user = User.objects.create(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name']
-        )
-
-        user.set_password(validated_data['password'])
+        user = SendRequest_to_login.objects.create(**validated_data)
         user.save()
-
         return user

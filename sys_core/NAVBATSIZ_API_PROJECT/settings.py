@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'apps_of_navbatsiz.user_app',
     'multiselectfield',
 
+
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,15 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        'for_anon_user': '1/sec',
+        'sustained': '1000/day'
+    },
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 30
+}
 
 ROOT_URLCONF = "sys_core.NAVBATSIZ_API_PROJECT.urls"
 
@@ -133,3 +143,6 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+

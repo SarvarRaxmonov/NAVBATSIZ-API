@@ -12,15 +12,22 @@ DAYS_OF_WEEK = (
     (5, "Saturday"),
     (6, "Sunday"),
 )
+Activate_choices = (
+    ("yes", "yes"),
+    ("no", "no"),
+)
 
 
 class Doctor_user_Registration(models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE)
-    password = models.IntegerField(verbose_name="Password", null=False)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
     phone_number = models.IntegerField(verbose_name="Phone Number", null=False)
-    email = models.EmailField(verbose_name="Email Address")
-    specialization = models.CharField(verbose_name="Specialization", max_length=50)
-    working_time = models.TimeField(verbose_name="Working Time", null=False)
+    email = models.EmailField(
+        verbose_name="Email Address", defualt="Email kiritilmagan"
+    )
+    specialization = models.CharField(
+        verbose_name="Specialization", max_length=50, blank=True
+    )
+    working_time = models.TimeField(verbose_name="Working Time")
     working_days = MultiSelectField(
         choices=DAYS_OF_WEEK, max_choices=6, max_length=20, default="None"
     )
@@ -34,7 +41,6 @@ class SendRequest_to_login(models.Model):
     )
     activate_profile = models.CharField(
         verbose_name="Activate Profile",
-        max_length=50,
-        choices=((1, "yes"), (2, "no")),
+        choices=Activate_choices,
         default=0,
     )
