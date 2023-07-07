@@ -3,14 +3,15 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser
 from .serialiers import All_Requests_of_doctors_to_login_update_serializer
 from apps_of_navbatsiz.doctor_panel.models import SendRequest_to_login
-
+from rest_framework.filters import OrderingFilter
 
 
 class All_Requests_of_doctors_to_login_Viewset(ModelViewSet):
     serializer_class = All_Requests_of_doctors_to_login_update_serializer
     http_method_names = ["get", "put"]
     Authentication = [IsAdminUser]
-    ordering = ("phone_number",)
+    filter_backends = (OrderingFilter,)
+    ordering = ('activate_profile')
 
     def put(self, request, id=None, *args, **kwargs):
         instance = SendRequest_to_login.objects.get(pk=id)

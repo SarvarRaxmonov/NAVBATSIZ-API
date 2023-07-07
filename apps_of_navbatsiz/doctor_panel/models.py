@@ -18,19 +18,17 @@ Activate_choices = (
 )
 
 
+
 class Doctor_user_Registration(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     phone_number = models.IntegerField(verbose_name="Phone Number", null=False)
     email = models.EmailField(
-        verbose_name="Email Address", defualt="Email kiritilmagan"
+        verbose_name="Email Address"
     )
     specialization = models.CharField(
         verbose_name="Specialization", max_length=50, blank=True
     )
-    working_time = models.TimeField(verbose_name="Working Time")
-    working_days = MultiSelectField(
-        choices=DAYS_OF_WEEK, max_choices=6, max_length=20, default="None"
-    )
+    working_schedule = models.JSONField(verbose_name="Working Schedule",default=dict)
 
 
 class SendRequest_to_login(models.Model):

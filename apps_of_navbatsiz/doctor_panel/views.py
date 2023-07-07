@@ -1,9 +1,7 @@
-from rest_framework.views import View
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from .serializers import SendRequest_to_login_Serializer
 from .models import SendRequest_to_login
-from rest_framework.decorators import action
 
 
 class SendRequest_to_login_view(ModelViewSet):
