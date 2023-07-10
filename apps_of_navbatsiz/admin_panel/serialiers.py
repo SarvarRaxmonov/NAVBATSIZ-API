@@ -20,6 +20,7 @@ class All_Requests_of_doctors_to_login_update_serializer(ModelSerializer):
             "id",
             "surname",
             "phone_number",
+            "email",
             "scanned_document",
             "activate_profile",
             "url",

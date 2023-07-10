@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import SendRequest_to_login
+from django.contrib.auth.models import User
 
 
 class SendRequest_to_login_Serializer(serializers.ModelSerializer):
@@ -10,7 +11,7 @@ class SendRequest_to_login_Serializer(serializers.ModelSerializer):
 
     class Meta:
         model = SendRequest_to_login
-        fields = ("id", "surname", "phone_number", "scanned_document")
+        fields = ("id", "surname", "phone_number", "scanned_document", "email")
 
     def validate(self, attrs):
         if SendRequest_to_login.objects.filter(
@@ -25,3 +26,9 @@ class SendRequest_to_login_Serializer(serializers.ModelSerializer):
         user = SendRequest_to_login.objects.create(**validated_data)
         user.save()
         return user
+
+
+class DoctorLoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["username", "password"]

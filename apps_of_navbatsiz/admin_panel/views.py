@@ -11,7 +11,7 @@ class All_Requests_of_doctors_to_login_Viewset(ModelViewSet):
     http_method_names = ["get", "put"]
     Authentication = [IsAdminUser]
     filter_backends = (OrderingFilter,)
-    ordering = ('activate_profile')
+    ordering = "activate_profile"
 
     def put(self, request, id=None, *args, **kwargs):
         instance = SendRequest_to_login.objects.get(pk=id)
