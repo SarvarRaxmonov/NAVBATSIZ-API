@@ -1,31 +1,31 @@
 from django.db import models
 from multiselectfield import MultiSelectField
 from django.contrib.auth.models import User
+from .choices import Activate_choices, Doctor_specialties
+from django.contrib.postgres.fields import ArrayField
 
 
-DAYS_OF_WEEK = (
-    (0, "Monday"),
-    (1, "Tuesday"),
-    (2, "Wednesday"),
-    (3, "Thursday"),
-    (4, "Friday"),
-    (5, "Saturday"),
-    (6, "Sunday"),
-)
-Activate_choices = (
-    ("yes", "yes"),
-    ("no", "no"),
-)
-
-
-class Doctor_user_Registration(models.Model):
+class Doctor_Profile(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     phone_number = models.IntegerField(verbose_name="Phone Number", null=False)
     email = models.EmailField(verbose_name="Email Address")
     specialization = models.CharField(
-        verbose_name="Specialization", max_length=50, blank=True
+        verbose_name="Specialization",
+        choices=Doctor_specialties,
+        max_length=120,
+        blank=True,
     )
-    working_schedule = models.JSONField(verbose_name="Working Schedule", default=dict)
+    sub_specializations = MultiSelectField(
+        choices=Doctor_specialties, max_length=120, blank=True
+    )
+    working_schedule = ArrayField(
+        ArrayField(models.CharField(max_length=30, blank=True), size=10, default=list),
+        size=10,
+        default=list,
+    )
+
+    def __str__(self):
+        return self.username.username
 
 
 class SendRequest_to_login(models.Model):

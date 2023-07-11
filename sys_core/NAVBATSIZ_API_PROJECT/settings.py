@@ -39,10 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "django_filters",
+    'multiselectfield',
+    'djchoices',
+    #apps
     'apps_of_navbatsiz.admin_panel',
     'apps_of_navbatsiz.doctor_panel',
     'apps_of_navbatsiz.user_app',
-    'multiselectfield',
+
 
 
 ]
@@ -63,7 +66,11 @@ REST_FRAMEWORK = {
         'sustained': '1000/day'
     },
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 30
+    'PAGE_SIZE': 30,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
 }
 
 ROOT_URLCONF = "sys_core.NAVBATSIZ_API_PROJECT.urls"
