@@ -23,7 +23,11 @@ urlpatterns = [
         name="request-detail",
     ),
     path("login", Profile_login_view.as_view(), name="login"),
-    path("profile/<str:username>", DoctorProfileView.as_view(), name="profile"),
+    path(
+        "profile/<str:username>",
+        DoctorProfileView.as_view({"get": "list"}),
+        name="profile-detail",
+    ),
 ]
 
 urlpatterns += router.urls

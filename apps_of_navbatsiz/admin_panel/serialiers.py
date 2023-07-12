@@ -2,7 +2,6 @@ from rest_framework.serializers import (
     ModelSerializer,
     ImageField,
     HyperlinkedIdentityField,
-    ModelField,
 )
 from apps_of_navbatsiz.doctor_panel.models import SendRequest_to_login
 

@@ -23,6 +23,10 @@ def str_time_converter(time: str):
 def day_duplicate_check(days: list):
     work_days = [item for schedule in days for item in schedule if type(item) == str]
     check_duplicates = Counter(work_days).most_common(1)
+    print(
+        check_duplicates,
+        "////////////////////////////////////////////////////////////////",
+    )
     if check_duplicates[0][1] > 1:
         return False
     return True

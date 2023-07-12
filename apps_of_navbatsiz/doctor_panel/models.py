@@ -19,14 +19,20 @@ class Doctor_Profile(models.Model):
         choices=Doctor_specialties, max_length=120, blank=True
     )
     working_schedule = ArrayField(
-        ArrayField(models.CharField(max_length=30, blank=True), size=10, default=list),
+        ArrayField(models.CharField(max_length=100, blank=True), size=10, default=list),
         size=10,
         default=list,
     )
+    study_description = models.CharField(max_length=1000, default=".")
+    experience = models.IntegerField(null=False, default=0)
+    additional_description = models.CharField(max_length=2000, blank=True)
 
     def __str__(self):
         return self.username.username
 
+
+
+# ----------------------------------------------------------------
 
 class SendRequest_to_login(models.Model):
     surname = models.CharField(verbose_name="Surename", max_length=50)
@@ -40,3 +46,5 @@ class SendRequest_to_login(models.Model):
         choices=Activate_choices,
         default=0,
     )
+
+
