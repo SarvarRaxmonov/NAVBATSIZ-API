@@ -11,6 +11,8 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sys_core.NAVBATSIZ_API_PROJECT.settings")
+os.environ.setdefault(
+    "DJANGO_SETTINGS_MODULE", "sys_core.NAVBATSIZ_API_PROJECT.settings"
+)
 
 application = get_wsgi_application()

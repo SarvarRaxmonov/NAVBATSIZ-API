@@ -40,15 +40,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "django_filters",
-    'multiselectfield',
-    'djchoices',
-    #apps
-    'apps_of_navbatsiz.admin_panel',
-    'apps_of_navbatsiz.doctor_panel',
-    'apps_of_navbatsiz.user_app',
-
-
-
+    "multiselectfield",
+    "djchoices",
+    # apps
+    "apps_of_navbatsiz.admin_panel",
+    "apps_of_navbatsiz.doctor_panel",
+    "apps_of_navbatsiz.user_app",
 ]
 
 MIDDLEWARE = [
@@ -62,15 +59,12 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_THROTTLE_RATES': {
-        'for_anon_user': '1/sec',
-        'sustained': '1000/day'
-    },
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 30,
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ]
+    "DEFAULT_THROTTLE_RATES": {"for_anon_user": "1/sec", "sustained": "1000/day"},
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 30,
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
 }
 
 ROOT_URLCONF = "sys_core.NAVBATSIZ_API_PROJECT.urls"
@@ -109,7 +103,6 @@ DATABASES = {
 }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -140,7 +133,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -157,6 +150,3 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-

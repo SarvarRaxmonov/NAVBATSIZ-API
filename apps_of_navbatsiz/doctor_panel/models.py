@@ -31,8 +31,8 @@ class Doctor_Profile(models.Model):
         return self.username.username
 
 
-
 # ----------------------------------------------------------------
+
 
 class SendRequest_to_login(models.Model):
     surname = models.CharField(verbose_name="Surename", max_length=50)
@@ -46,5 +46,3 @@ class SendRequest_to_login(models.Model):
         choices=Activate_choices,
         default=0,
     )
-
-
